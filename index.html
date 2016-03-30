@@ -4,5 +4,38 @@
 		<script src="/app.js"></script>
 	</head>
 	<body>
+		<div ng-app="app">
+			<div ng-controller="MinesweeperCtrl as ctrl">
+				<table>
+					<tr ng-repeat="row in ctrl.visibleMap track by $index"
+							ng-init="i = $index">
+						<td ng-repeat="column in row track by $index"
+								ng-init="j = $index"
+								ng-click="ctrl.squareClick(i,j)">
+							<span ng-if="column == 0">
+								?
+							</span>
+							<span ng-if="column != 0">
+								{{ctrl.neighborMap[i][j]}}
+							</span>
+						</td>
+					</tr>
+				</table>
+				<form>
+					<div>
+						<label>Height</label><input type="text" ng-model="ctrl.displayHeight"></input>
+					</div>
+					<div>
+						<label>Width</label><input type="text" ng-model="ctrl.displayWidth"></input>
+					</div>
+					<div>
+						<label>numMines</label><input type="text" ng-model="ctrl.displayNumMines"></input>
+					</div>
+					<div>
+						<button ng-click="ctrl.doInit()">Redo</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>
